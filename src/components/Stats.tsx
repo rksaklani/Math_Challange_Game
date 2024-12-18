@@ -1,15 +1,20 @@
 import React from 'react';
-import { Timer, Trophy, Zap } from 'lucide-react';
+import { Timer, Trophy, Zap,CircleFadingPlus } from 'lucide-react';
 
 interface StatsProps {
   timeLeft: number;
   score: number;
   streak: number;
+  totalquestion:number;
 }
 
-export default function Stats({ timeLeft, score, streak }: StatsProps) {
+export default function Stats({ timeLeft, score, streak  totalquestion}: StatsProps) {
   return (
     <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2">
+        <CircleFadingPlus className="w-5 h-5 text-gray-600" />
+        <span className="text-xl font-semibold">{totalquestion}</span>
+      </div>
       <div className="flex items-center gap-2">
         <Timer className="w-5 h-5 text-gray-600" />
         <span className="text-xl font-semibold">{timeLeft}s</span>
