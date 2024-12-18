@@ -28,13 +28,13 @@ export default function GameBoard() {
   });
 
   useEffect(() => {
-    if (!gameOver && timeLeft > 0) {
+    if (!gameOver && timeLeft > 0 && gameStart) {
       const timer = setInterval(() => setTimeLeft(prev => prev - 1), 1000);
       return () => clearInterval(timer);
     } else if (timeLeft === 0) {
       setGameOver(true);
     }
-  }, [timeLeft, gameOver]);
+  }, [timeLeft, gameOver, && gameStart]);
 
   useEffect(() => {
     if (!gameOver) {
@@ -128,7 +128,7 @@ useEffect(() => {
       <div className="w-full max-w-2xl p-8 bg-white shadow-2xl rounded-xl">
         {!gameStart ? (
           <div className="text-center">
-            <h1 className="mb-8 text-4xl font-bold text-gray-800">Welcome to Math AI Game!</h1>
+            <h1 className="mb-8 text-4xl font-bold text-gray-800">Welcome to Math's Game!</h1>
             <p className="mb-8 text-lg text-gray-600">Sharpen your math skills and beat the clock.</p>
             <button
               onClick={() => setGameStart(true)} // Start the game
@@ -141,7 +141,7 @@ useEffect(() => {
           <>
             <div className="flex items-center justify-between mb-8">
               <Header />
-              <Stats timeLeft={timeLeft} score={score} streak={streak} />
+              <Stats timeLeft={timeLeft} score={score} streak={streak} totalquestion={questionsAnswered/>
             </div>
             {!gameOver ? (
               <>
@@ -195,7 +195,7 @@ useEffect(() => {
           </>
         )}
       </div>
-      {showProgress && !gameOver && (
+      {showProgress && !gameOver && timeLeft==0 && (
         <ProgressModal
           stats={getProgressStats()}
           onClose={() => setShowProgress(false)}
